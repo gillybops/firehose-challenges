@@ -11,17 +11,17 @@ class Image
   end
 
   def blur
-    @raw_data_with_index do |row, row_num|
+    @raw_data.each_with_index do |row, row_num|
       row.each_with_index do |item, index|
         if item == 1
-          @new_data[row_num][index - 1] = 1 unless index == 0
-          @new_data[row_num][index + 1] = 1 unless (index + 1) >= row.length
-          @new_data[row_num][index] = 1 unless row_num == 0
-          @new_data[row_num + 1][index] = 1 unless (row_num +1) >= @raw_data.length
+          @raw_data[row_num][index - 1] = 1 unless index == 0
+          @raw_data[row_num][index + 1] = 1 unless (index + 1) >= row.length
+          @raw_data[row_num][index] = 1 unless row_num == 0
+          @raw_data[row_num + 1][index] = 1 unless (row_num +1) >= @raw_data.length
         end
       end
     end
-    Image.new(@new_data)
+    Image.new(@raw_data)
   end
 end
 
@@ -33,3 +33,5 @@ end
 ])
 
 image.output_image
+blurred_image = image.blur.output_image
+p blurred_image

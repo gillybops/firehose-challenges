@@ -35,7 +35,8 @@ class Deck
   end
 
   def deal
-    @deck_of_cards.shift
+    top_card = @deck_of_cards.shift
+    puts top_card
   end
 
   def output_deck
